@@ -1,0 +1,233 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Player/Jump/char_2_jump-1.png.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/Jump/char_2_jump-2.png.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/Run/Player_Run-1.png.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/Run/Player_Run-2.png.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Run/Player_Run-3.png.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Run/Player_Run-4.png.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Player/Run/Player_Run-5.png.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/Run/Player_Run-6.png.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Player/Run/Player_Run-7.png.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/Run/Player_Run-8.png.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/Player_Idle.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Player/Attacks/Dagger/Stab_1/player_stab_1-2.png.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Player/Attacks/Dagger/Stab_1/player_stab_1-3.png.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Player/Attacks/Dagger/Stab_1/player_stab_1-4.png.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Player/Attacks/Dagger/Stab_1/player_stab_1-5.png.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Player/Attacks/Dagger/Slash_1/player_slash-2.png.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Player/Attacks/Dagger/Slash_1/player_slash-3.png.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Player/Attacks/Dagger/Slash_1/player_slash-4.png.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Player/Attacks/Dagger/Slash_1/player_slash-5.png.png" type="Texture" id=20]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "Run",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "Stab_1",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 19 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "Slash_1",
+"speed": 24.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 53.3333, 10 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 31.2882, 31.9787 )
+
+[node name="Player" type="KinematicBody2D"]
+
+scale = Vector2( 0.15625, 0.5 )
+input_pickable = false
+collision_layer = 4
+collision_mask = 5
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="Sprite" type="AnimatedSprite" parent="." index="0"]
+
+scale = Vector2( 6.3, 2 )
+frames = SubResource( 1 )
+animation = "Run"
+frame = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+visible = false
+scale = Vector2( 3.18, 3.2 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 10.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.05
+drag_margin_top = 0.1
+drag_margin_right = 0.05
+drag_margin_bottom = 0.1
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Smoothing" ]
+
+[node name="StabHbR" type="Area2D" parent="." index="3"]
+
+editor/display_folded = true
+position = Vector2( 74.83, -5.98598 )
+scale = Vector2( 1.29056, 0.0807648 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StabHbR" index="0"]
+
+position = Vector2( 5.19161e-07, 4.76837e-06 )
+scale = Vector2( 0.568048, 2.46154 )
+shape = SubResource( 3 )
+
+[node name="StabHbL" type="Area2D" parent="." index="4"]
+
+editor/display_folded = true
+position = Vector2( -78.7816, -6.35982 )
+scale = Vector2( 1.08869, 0.0690822 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StabHbL" index="0"]
+
+position = Vector2( 0.139682, 5.41156 )
+scale = Vector2( 0.608022, 2.87781 )
+shape = SubResource( 3 )
+
+[node name="SlashHbR" type="Area2D" parent="." index="5"]
+
+editor/display_folded = true
+position = Vector2( 9.10214, -6.77426 )
+scale = Vector2( 4.04191, 0.105399 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlashHbR" index="0"]
+
+position = Vector2( 0.0989896, -4.13574 )
+scale = Vector2( 3.19583, 2.77967 )
+shape = SubResource( 4 )
+
+[node name="SlashHbL" type="Area2D" parent="." index="6"]
+
+editor/display_folded = true
+position = Vector2( 9.10214, -6.77426 )
+scale = Vector2( 4.04191, 0.105399 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlashHbL" index="0"]
+
+position = Vector2( -4.4928, -2.88512 )
+scale = Vector2( 3.19583, 2.77967 )
+shape = SubResource( 4 )
+
+[node name="Position2D" type="Position2D" parent="." index="7"]
+
+[node name="PlayerHitbox" type="Area2D" parent="." index="8"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox" index="0"]
+
+shape = SubResource( 5 )
+
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
+
+

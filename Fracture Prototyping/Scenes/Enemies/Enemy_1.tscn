@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Enemy_1.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Enemy/New Piskel-2.png-1.png.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Enemy_Hitbox.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 28, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 27, 28 )
+
+[node name="Enemy_1" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 2
+collision_mask = 3
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="icon" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 3, 3 )
+scale = Vector2( 0.967742, 0.914286 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="EnemyHitbox" type="Area2D" parent="." index="2"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
+
+position = Vector2( 3, 3 )
+scale = Vector2( 1, 1.03226 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+
