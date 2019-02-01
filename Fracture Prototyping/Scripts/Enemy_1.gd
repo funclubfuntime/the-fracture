@@ -55,7 +55,7 @@ func _process(delta):
 		motion.x = lerp(motion.x, 0, 0.2)
 	
 	motion = move_and_slide(motion, UP)
-	var collision = get_slide_collision(0)
+	#var collision = get_slide_collision(0)
 	
 	
 	

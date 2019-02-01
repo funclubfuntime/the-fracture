@@ -1,7 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Sprites/Ground/ground_tiles full.png" type="Texture" id=1]
-
+[ext_resource path="res://Sprites/Ground/ground_tiles_2_6.png" type="Texture" id=1]
 
 [node name="ground_tiles full" type="Sprite" index="0"]
 

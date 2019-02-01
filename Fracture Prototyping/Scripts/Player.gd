@@ -19,15 +19,18 @@ var player_facing = "right"
 var state = "moving"
 var animation = "start"
 
+var combo = false
+var impulse = false;
+
 func _physics_process(delta):
 	if Input.is_action_pressed("ui_right"):
 		player_facing = "right"
 	if Input.is_action_pressed("ui_left"):
 		player_facing = "left"
 	
+	attack_loop()
 	controls_loop()
 	movement_loop()
-	attack_loop()
 
 func controls_loop():
 	var LEFT = Input.is_action_pressed("ui_left")
@@ -63,35 +66,55 @@ func movement_loop():
 		
 		if Input.is_action_just_pressed("stab_atk"):
 			state = "stab_1"
+			motion.y = 0
 		if Input.is_action_just_pressed("slash_atk"):
 			state = "slash_1"
 
 func attack_loop():
 	if state == "stab_1":
-		motion.y = 0
-		motion.y += GRAVITY
+		#motion.y = 0
+		motion.y += GRAVITY/3
 		$Sprite.play("Stab_1")
-		if player_facing == "right":
-			motion.x = 225
+		if impulse==false:
+			if player_facing == "right":
+				motion.x = max(motion.x, 75)
+			else:
+				motion.x = min(motion.x, -75)
+			impulse = true;
 		else:
-			motion.x = -225
+			motion.x = lerp(motion.x, 0, 0.2)
+			
+		if Input.is_action_just_pressed("stab_atk"):
+			combo = true
 		
 		if animation == "fin":
-			state = "moving"
+			if combo == true:
+				animation = "start"
+				combo = false
+				state = "slash_1"
+				motion.y = 0
+				impulse = false;
+			else:
+				state = "moving"
+				impulse = false;
 		
 		motion = move_and_slide(motion, UP)
 	
 	if state == "slash_1":
-		motion.y = 0
-		motion.y += GRAVITY
+		motion.y += GRAVITY/3
 		$Sprite.play("Slash_1")
-		if player_facing == "right":
-			motion.x = max(motion.x, 50)
+		if impulse==false:
+			if player_facing == "right":
+				motion.x = 175
+			else:
+				motion.x = -175
+			impulse = true;
 		else:
-			motion.x = min(motion.x, -50)
+			motion.x = lerp(motion.x, 0, 0.2)
 		
 		if animation == "fin":
 			state = "moving"
+			impulse = false;
 		
 		motion = move_and_slide(motion, UP)
 
